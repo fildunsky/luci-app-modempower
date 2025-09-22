@@ -25,6 +25,12 @@ define Package/$(PKG_NAME)/description
 endef
 
 define Build/Compile
+	@mkdir -p $(PKG_BUILD_DIR)/po/ru
+	@if [ -f "./po/ru/modem_power.po" ]; then \
+		$(STAGING_DIR_HOSTPKG)/bin/po2lmo \
+			"./po/ru/modem_power.po" \
+			"$(PKG_BUILD_DIR)/po/ru/modem_power.lmo"; \
+	fi
 endef
 
 define Package/$(PKG_NAME)/install
