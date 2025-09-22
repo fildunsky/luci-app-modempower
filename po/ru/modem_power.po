@@ -12,5 +12,11 @@ msgstr "Питание"
 msgid "Modem Power"
 msgstr "Питание модема"
 
-msgid "Reboot"
-msgstr "Перезагрузка"
+msgid "Current state:"
+msgstr "Текущее состояние:"
+
+msgid "ON"
+msgstr "ВКЛ"
+
+msgid "OFF"
+msgstr "ВЫКЛ"
