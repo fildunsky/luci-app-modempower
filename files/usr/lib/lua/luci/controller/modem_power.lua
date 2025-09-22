@@ -1,6 +1,6 @@
 module("luci.controller.modem_power", package.seeall)
 
-local fs = require "nixio.fs"
+local fs   = require "nixio.fs"
 local http = require "luci.http"
 
 local VALUE = "/sys/class/gpio/modem_power/value"
@@ -19,9 +19,16 @@ local function write_value(v)
 end
 
 function index()
+  -- если файла нет, пункт меню не показываем
   if not fs.access(VALUE) then return end
-  entry({"admin","system","modem_power"}, call("action_index"), _("Modem Power"), 90)
-  entry({"admin","system","modem_power","set"}, call("action_set")).leaf = true
+
+  -- создаём корневой раздел "Modem", если его ещё нет
+  local root = entry({"admin", "modem"}, firstchild(), _("Modem"), 50)
+  root.dependent = false
+
+  -- сама страница в Modem → Power
+  entry({"admin", "modem", "power"}, call("action_index"), _("Power"), 30)
+  entry({"admin", "modem", "power", "set"}, call("action_set")).leaf = true
 end
 
 function action_index()
@@ -31,5 +38,6 @@ end
 function action_set()
   local v = http.formvalue("v")
   write_value(v)
-  http.redirect(luci.dispatcher.build_url("admin/system/modem_power"))
+  http.redirect(luci.dispatcher.build_url("admin/modem/power"))
 end
+
