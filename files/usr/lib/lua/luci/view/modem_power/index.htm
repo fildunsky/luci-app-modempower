@@ -1,0 +1,14 @@
+<%+header%>
+<h2>Modem Power</h2>
+<p>Current state: <strong><%= (state == 1) and "ON" or "OFF" %></strong></p>
+
+<form method="post" action="<%=url('admin/system/modem_power/set')%>" style="display:inline">
+  <input type="hidden" name="v" value="1">
+  <button class="btn cbi-button cbi-button-apply" <%= (state==1) and 'disabled' or '' %>>ON</button>
+</form>
+
+<form method="post" action="<%=url('admin/system/modem_power/set')%>" style="display:inline;margin-left:0.5rem">
+  <input type="hidden" name="v" value="0">
+  <button class="btn cbi-button cbi-button-reset" <%= (state==0) and 'disabled' or '' %>>OFF</button>
+</form>
+<%+footer%>

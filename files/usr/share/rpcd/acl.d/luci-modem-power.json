@@ -1,0 +1,7 @@
+{
+  "luci-app-modempower": {
+    "description": "USB modem reboot via GPIO in luci",
+    "read": { "file": { "/sys/class/gpio/modem_power/value": [ "read" ] } },
+    "write": { "file": { "/sys/class/gpio/modem_power/value": [ "write" ] } }
+  }
+}
